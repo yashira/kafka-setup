@@ -24,13 +24,6 @@ const sendMessage = async(producer, review) => {
   }]
   });
 }
-/*
-https://hooks.slack.com/workflows/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
-{
-  "customer_name": "Example text",
-  "ratting": "Example text",
-  "product_name": "Example text"
-}*/
 
 const main = async() => {
 
