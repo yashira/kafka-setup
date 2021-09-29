@@ -1,0 +1,87 @@
+<mxfile host="app.diagrams.net" modified="2021-09-21T09:13:21.851Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.1.1 Safari/605.1.15" etag="ISw2rjd1M0bLdSYUmHZ2" version="15.2.9" type="github">
+  <diagram id="UcJYhxudkAFEtLXRB1-E" name="Page-1">
+    <mxGraphModel dx="946" dy="645" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="Vgoxmw2XM_leVPSxetgi-1" value="" style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;gradientColor=#945DF2;gradientDirection=north;fillColor=#5A30B5;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.managed_streaming_for_kafka;" vertex="1" parent="1">
+          <mxGeometry x="375" y="160" width="78" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="Vgoxmw2XM_leVPSxetgi-2" value="" style="sketch=0;html=1;dashed=0;whitespace=wrap;fillColor=#2875E2;strokeColor=#ffffff;points=[[0.005,0.63,0],[0.1,0.2,0],[0.9,0.2,0],[0.5,0,0],[0.995,0.63,0],[0.72,0.99,0],[0.5,1,0],[0.28,0.99,0]];shape=mxgraph.kubernetes.icon;prIcon=api" vertex="1" parent="1">
+          <mxGeometry x="120" y="80" width="50" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="Vgoxmw2XM_leVPSxetgi-3" value="" style="sketch=0;html=1;dashed=0;whitespace=wrap;fillColor=#2875E2;strokeColor=#ffffff;points=[[0.005,0.63,0],[0.1,0.2,0],[0.9,0.2,0],[0.5,0,0],[0.995,0.63,0],[0.72,0.99,0],[0.5,1,0],[0.28,0.99,0]];shape=mxgraph.kubernetes.icon;prIcon=api" vertex="1" parent="1">
+          <mxGeometry x="640" y="350" width="50" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="Vgoxmw2XM_leVPSxetgi-5" value="" style="image;html=1;image=img/lib/clip_art/computers/Database_128x128.png" vertex="1" parent="1">
+          <mxGeometry x="120" y="230" width="60" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Vgoxmw2XM_leVPSxetgi-6" value="" style="image;html=1;image=img/lib/clip_art/computers/Database_128x128.png" vertex="1" parent="1">
+          <mxGeometry x="635" y="168" width="60" height="62" as="geometry" />
+        </mxCell>
+        <mxCell id="Vgoxmw2XM_leVPSxetgi-7" value="" style="endArrow=classic;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="Vgoxmw2XM_leVPSxetgi-5" target="Vgoxmw2XM_leVPSxetgi-1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="390" y="360" as="sourcePoint" />
+            <mxPoint x="440" y="310" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="320" y="260" />
+              <mxPoint x="320" y="219" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Vgoxmw2XM_leVPSxetgi-8" value="" style="endArrow=classic;html=1;exitX=0.995;exitY=0.63;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="Vgoxmw2XM_leVPSxetgi-2" target="Vgoxmw2XM_leVPSxetgi-1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="390" y="360" as="sourcePoint" />
+            <mxPoint x="440" y="310" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="170" y="199" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Vgoxmw2XM_leVPSxetgi-9" value="" style="endArrow=classic;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="Vgoxmw2XM_leVPSxetgi-1" target="Vgoxmw2XM_leVPSxetgi-6">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="390" y="360" as="sourcePoint" />
+            <mxPoint x="440" y="310" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Vgoxmw2XM_leVPSxetgi-10" value="" style="endArrow=classic;html=1;entryX=0.005;entryY=0.63;entryDx=0;entryDy=0;entryPerimeter=0;exitX=1;exitY=0.75;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="Vgoxmw2XM_leVPSxetgi-1" target="Vgoxmw2XM_leVPSxetgi-3">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="390" y="360" as="sourcePoint" />
+            <mxPoint x="440" y="310" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="520" y="219" />
+              <mxPoint x="520" y="380" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Vgoxmw2XM_leVPSxetgi-11" value="" style="shape=image;html=1;verticalAlign=top;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;imageAspect=0;aspect=fixed;image=https://cdn0.iconfinder.com/data/icons/common-file-extensions-audio-documents/24/ext_csv-128.png" vertex="1" parent="1">
+          <mxGeometry x="120" y="370" width="70" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="Vgoxmw2XM_leVPSxetgi-12" value="" style="endArrow=classic;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=1;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="Vgoxmw2XM_leVPSxetgi-11" target="Vgoxmw2XM_leVPSxetgi-1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="390" y="360" as="sourcePoint" />
+            <mxPoint x="440" y="310" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="240" y="405" />
+              <mxPoint x="240" y="280" />
+              <mxPoint x="340" y="280" />
+              <mxPoint x="340" y="238" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Vgoxmw2XM_leVPSxetgi-14" value="Product Review" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="120" y="140" width="40" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="Vgoxmw2XM_leVPSxetgi-15" value="Customer Database" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="130" y="300" width="40" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="Vgoxmw2XM_leVPSxetgi-16" value="Slack notification API" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="645" y="410" width="40" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="Vgoxmw2XM_leVPSxetgi-17" value="Data Lake" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="645" y="238" width="40" height="20" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
