@@ -11,7 +11,7 @@ This docker based kafka setup contains
 
 ## Installation
 
-Please ensure to install [docker][dill] and  [docker-compose](https://docs.docker.com/compose/install/)
+Please ensure to install **docker** and  [docker-compose](https://docs.docker.com/compose/install/)
 
 Run the following command to setup the docker containers
 
