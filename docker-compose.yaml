@@ -1,0 +1,214 @@
+---
+version: '3.5'
+
+services:
+  zookeeper:
+    image: confluentinc/cp-zookeeper:6.1.0
+    hostname: zookeeper
+    container_name: zookeeper
+    ports:
+      - "2181:2181"
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+
+  broker:
+    image: confluentinc/cp-kafka:6.1.0
+    hostname: broker
+    container_name: broker
+    depends_on:
+      - zookeeper
+    ports:
+      - "29092:29092"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://broker:9092,PLAINTEXT_HOST://localhost:29092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 100
+
+  schema-registry:
+    image: confluentinc/cp-schema-registry:6.1.0
+    hostname: schema-registry
+    container_name: schema-registry
+    depends_on:
+      - broker
+    ports:
+      - "8081:8081"
+    environment:
+      SCHEMA_REGISTRY_HOST_NAME: schema-registry
+      SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: 'broker:9092'
+
+  # connect1:
+  #   image: localimage/kafka-connect-jdbc-source:latest
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile-connect
+  #   container_name: connect1
+  #   depends_on:
+  #     - broker
+  #     - schema-registry
+  #   ports:
+  #     - 8083:8083
+  #   environment:
+  #     CONNECT_BOOTSTRAP_SERVERS: "broker:9092"
+  #     CONNECT_REST_ADVERTISED_HOST_NAME: "connect1"
+  #     CONNECT_REST_PORT: 8083
+  #     CONNECT_GROUP_ID: kafka-connect
+  #     CONNECT_CONFIG_STORAGE_TOPIC: _kafka-connect-configs
+  #     CONNECT_OFFSET_STORAGE_TOPIC: _kafka-connect-offsets
+  #     CONNECT_STATUS_STORAGE_TOPIC: _kafka-connect-status
+  #     CONNECT_KEY_CONVERTER: io.confluent.connect.avro.AvroConverter
+  #     CONNECT_KEY_CONVERTER_SCHEMA_REGISTRY_URL: 'http://schema-registry:8081'
+  #     CONNECT_VALUE_CONVERTER: io.confluent.connect.avro.AvroConverter
+  #     CONNECT_VALUE_CONVERTER_SCHEMA_REGISTRY_URL: 'http://schema-registry:8081'
+  #     CONNECT_LOG4J_ROOT_LOGLEVEL: "INFO"
+  #     CONNECT_LOG4J_LOGGERS: "org.apache.kafka.connect.runtime.rest=WARN,org.reflections=ERROR"
+  #     CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR: "1"
+  #     CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR: "1"
+  #     CONNECT_STATUS_STORAGE_REPLICATION_FACTOR: "1"
+  #     CONNECT_PLUGIN_PATH: "/usr/share/java"
+
+  # connect2:
+  #   image: localimage/kafka-connect-jdbc-sink:latest
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile-connect
+  #   container_name: connect2
+  #   depends_on:
+  #     - broker
+  #     - schema-registry
+  #   ports:
+  #     - 8084:8083
+  #   environment:
+  #     CONNECT_BOOTSTRAP_SERVERS: "broker:9092"
+  #     CONNECT_REST_ADVERTISED_HOST_NAME: "connect2"
+  #     CONNECT_REST_PORT: 8083
+  #     CONNECT_GROUP_ID: kafka-connect2
+  #     CONNECT_CONFIG_STORAGE_TOPIC: _kafka-connect-configs
+  #     CONNECT_OFFSET_STORAGE_TOPIC: _kafka-connect-offsets
+  #     CONNECT_STATUS_STORAGE_TOPIC: _kafka-connect-status
+  #     CONNECT_KEY_CONVERTER: io.confluent.connect.avro.AvroConverter
+  #     CONNECT_KEY_CONVERTER_SCHEMA_REGISTRY_URL: 'http://schema-registry:8081'
+  #     CONNECT_VALUE_CONVERTER: io.confluent.connect.avro.AvroConverter
+  #     CONNECT_VALUE_CONVERTER_SCHEMA_REGISTRY_URL: 'http://schema-registry:8081'
+  #     CONNECT_LOG4J_ROOT_LOGLEVEL: "INFO"
+  #     CONNECT_LOG4J_LOGGERS: "org.apache.kafka.connect.runtime.rest=WARN,org.reflections=ERROR"
+  #     CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR: "1"
+  #     CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR: "1"
+  #     CONNECT_STATUS_STORAGE_REPLICATION_FACTOR: "1"
+  #     CONNECT_PLUGIN_PATH: "/usr/share/java,/usr/share/confluent-hub-components"
+
+  connect3:
+    image: localimage/kafka-connect-csv-source:latest
+    build:
+      context: .
+      dockerfile: Dockerfile-connect-csv-source
+    container_name: connect3
+    depends_on:
+      - broker
+      - schema-registry
+    ports:
+      - 8085:8083
+    volumes:
+      - ./output/csv/input:/tmp/input
+      - ./output/csv/output:/tmp/output
+      - ./output/csv/error:/tmp/error
+    environment:
+      CONNECT_BOOTSTRAP_SERVERS: "broker:9092"
+      CONNECT_REST_ADVERTISED_HOST_NAME: "connect3"
+      CONNECT_REST_PORT: 8083
+      CONNECT_GROUP_ID: kafka-connect3
+      CONNECT_CONFIG_STORAGE_TOPIC: _kafka-connect-configs
+      CONNECT_OFFSET_STORAGE_TOPIC: _kafka-connect-offsets
+      CONNECT_STATUS_STORAGE_TOPIC: _kafka-connect-status
+      CONNECT_KEY_CONVERTER: io.confluent.connect.avro.AvroConverter
+      CONNECT_KEY_CONVERTER_SCHEMA_REGISTRY_URL: 'http://schema-registry:8081'
+      CONNECT_VALUE_CONVERTER: io.confluent.connect.avro.AvroConverter
+      CONNECT_VALUE_CONVERTER_SCHEMA_REGISTRY_URL: 'http://schema-registry:8081'
+      CONNECT_LOG4J_ROOT_LOGLEVEL: "INFO"
+      CONNECT_LOG4J_LOGGERS: "org.apache.kafka.connect.runtime.rest=WARN,org.reflections=ERROR"
+      CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR: "1"
+      CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR: "1"
+      CONNECT_STATUS_STORAGE_REPLICATION_FACTOR: "1"
+      CONNECT_PLUGIN_PATH: "/usr/share/java,/usr/share/confluent-hub-components"
+      CONNECT_CLEANUP_POLICY : "compact"
+
+  ksqldb-server:
+    image: confluentinc/ksqldb-server:0.17.0
+    hostname: ksqldb
+    container_name: ksqldb
+    depends_on:
+      - broker
+    ports:
+      - "8088:8088"
+    environment:
+      KSQL_LISTENERS: http://0.0.0.0:8088
+      KSQL_BOOTSTRAP_SERVERS: broker:9092
+      KSQL_KSQL_LOGGING_PROCESSING_STREAM_AUTO_CREATE: "true"
+      KSQL_KSQL_LOGGING_PROCESSING_TOPIC_AUTO_CREATE: "true"
+      KSQL_KSQL_SCHEMA_REGISTRY_URL: http://schema-registry:8081
+      KSQL_KSQL_SERVICE_ID: confluent_rmoff_01
+      KSQL_KSQL_HIDDEN_TOPICS: '^_.*'
+      # Setting KSQL_KSQL_CONNECT_WORKER_CONFIG enables embedded Kafka Connect
+      KSQL_KSQL_CONNECT_WORKER_CONFIG: "/connect/connect.properties"
+      # Kafka Connect config below
+      KSQL_CONNECT_BOOTSTRAP_SERVERS: "broker:9092"
+      KSQL_CONNECT_REST_ADVERTISED_HOST_NAME: 'ksqldb'
+      KSQL_CONNECT_REST_PORT: 8083
+      KSQL_CONNECT_GROUP_ID: ksqldb-kafka-connect-group-01
+      KSQL_CONNECT_CONFIG_STORAGE_TOPIC: _ksqldb-kafka-connect-group-01-configs
+      KSQL_CONNECT_OFFSET_STORAGE_TOPIC: _ksqldb-kafka-connect-group-01-offsets
+      KSQL_CONNECT_STATUS_STORAGE_TOPIC: _ksqldb-kafka-connect-group-01-status
+      KSQL_CONNECT_KEY_CONVERTER: io.confluent.connect.avro.AvroConverter
+      KSQL_CONNECT_KEY_CONVERTER_SCHEMA_REGISTRY_URL: "http://schema-registry:8081"
+      KSQL_CONNECT_VALUE_CONVERTER: io.confluent.connect.avro.AvroConverter
+      KSQL_CONNECT_VALUE_CONVERTER_SCHEMA_REGISTRY_URL: "http://schema-registry:8081"
+      KSQL_CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR: '1'
+      KSQL_CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR: '1'
+      KSQL_CONNECT_STATUS_STORAGE_REPLICATION_FACTOR: '1'
+      KSQL_CONNECT_LOG4J_APPENDER_STDOUT_LAYOUT_CONVERSIONPATTERN: "[%d] %p %X{connector.context}%m (%c:%L)%n"
+      KSQL_CONNECT_PLUGIN_PATH: '/home/appuser/share/java,/home/appuser/confluent-hub-components/,/data/connect-jars'
+
+  ksqldb-cli:
+    image: confluentinc/ksqldb-cli:0.17.0
+    container_name: ksqldb-cli
+    depends_on:
+      - broker
+      - ksqldb-server
+    entrypoint: /bin/sh
+    tty: true
+    environment:
+      KSQL_CONFIG_DIR: "/etc/ksqldb"
+    volumes:
+      - ./src:/opt/app/src
+
+  postgres:
+    # *-----------------------------*
+    # To connect to the DB:
+    #   docker exec -it postgres bash -c 'psql -U $POSTGRES_USER $POSTGRES_DB'
+    # *-----------------------------*
+    image: postgres:11
+    container_name: postgres
+    environment:
+     - POSTGRES_USER=postgres
+     - POSTGRES_PASSWORD=postgres
+    volumes:
+     - ./sql/postgres/Customers.sql:/docker-entrypoint-initdb.d/Customers.sql
+
+  mysql:
+    image: mysql:5.7
+    restart: always
+    container_name: mysql
+    environment:
+      MYSQL_DATABASE: business_details
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - 3306:3306
+    volumes:
+     - ./sql/mysql:/docker-entrypoint-initdb.d/

@@ -1,0 +1,14 @@
+{
+  "name": "product_rating_service",
+  "version": "1.0.0",
+  "description": "This is a kafka producer to fetch data from csv and send to a broker",
+  "main": "index.js",
+  "author": "Yashira",
+  "license": "MIT",
+  "dependencies": {
+    "kafkajs": "^1.15.0"
+  },
+  "scripts": {
+    "start": "node index.js"
+  }
+}
