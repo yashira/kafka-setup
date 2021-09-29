@@ -20,6 +20,12 @@ docker-compose up -d --build
 ```
 > This will build relevant images and create docker containers.
 
+## Setup
+01. Create a topic to gather incomming product events from product rating service
+```sh
+docker-compose exec broker kafka-topics \ --create \ --bootstrap-server localhost:9092 \ --replication-factor 1 \ --partitions 1 \ --topic reviews
+```  
+
 ## Plugins
 
 Dillinger is currently extended with the following plugins.
